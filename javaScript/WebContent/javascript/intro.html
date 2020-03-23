@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 스크립트는 head / body 둘다 사용가능하지롱 -->
+    <script>
+        
+    </script>
+</head>
+<body>
+    <p id="show" >HTML Content</p>
+    <IMG id="btn" src="http://www.w3schools.com/js/pic_bulboff.gif" style="width: 100px;">
+    <button onclick="changeDoc()">ON</button>
+    <button onclick="changeDoc1()">OFF</button>
+    <button onclick="changeDoc2()">클릭</button>
+    <button onclick="changeDoc3()">클릭2</button>
+    <script>
+        function changeDoc(){
+            //document.getElementById("show").innerHTML="WELCOME JS"
+            document.getElementById("btn").src = "http://www.w3schools.com/js/pic_bulbon.gif";
+        }
+        function changeDoc1(){
+            document.getElementById("btn").src ="http://www.w3schools.com/js/pic_bulboff.gif";
+        }
+        function changeDoc2(){
+            document.getElementById("show").style.fontSize="50px";
+            document.getElementById("show").style.display="block";
+        }
+        function changeDoc3(){
+            document.getElementById("show").style.display="none";
+        }
+    </script>
+</body>
+</html>
