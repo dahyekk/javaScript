@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>getEmpList.html</title>
+</head>
+<body>
+	<h1>Ajax</h1>
+	<div id = "show" ></div>
+	
+	<script>
+		var xhtp = new XMLHttpRequest();
+		
+		xhtp.onreadystatechange = function(){
+			//console.log("readyState:"+xhtp.readyState+", status:"+xhtp.status)
+			if(xhtp.readyState == 4 && xhtp.status == 200){
+				console.log(xhtp.responseText);
+				var parsedData = JSON.parse(xhtp.responseText);
+				showPage(parsedData);
+				
+				/*var $tag = "<ul>";
+				$tag +="<li>"+ parsedData[0].id + "-"
+					 + parsedData[0].first_name + "-"
+					 + parsedData[0].last_name + "</li></ul>";
+				
+			document.getElementById("show").innerHTML = $tag;*/
+			}				
+		}
+		xhtp.open("get", "../GetEmpListSevlet");
+		xhtp.send();
+		
+		function showPage(datas){
+			var $tbl, $tr, $td, $th, $text;
+			$tbl = document.createElement("table");
+         	$tbl.setAttribute("border", 1);
+
+			var titles = ["empId", "firstName", "lastName", "email", "salary"];
+			 
+			$tr = document.createElement("tr");    
+	        for (f in titles) {
+	           $th = document.createElement("th");
+	           $text = document.createTextNode(titles[f]);
+	           $th.appendChild($text);
+	           $tr.appendChild($th);
+	        }
+	        $tbl.appendChild($tr)
+
+            datas.forEach(function(o){
+               $tr = document.createElement("tr");
+               for(field of titles) {
+                  $text = document.createTextNode(o[field]);
+                  $td = document.createElement("td");
+                  $td.appendChild($text);
+                  $tr.appendChild($td);
+               } 
+               $tbl.appendChild($tr);
+               document.body.appendChild($tbl);
+            });
+            
+
+			
+		}
+	</script>
+</body>
+</html>
