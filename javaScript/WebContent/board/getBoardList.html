@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>getBoardList</title>
+</head>
+
+<body>
+    <h1>hello</h1>
+    <div id=show></div>
+    <script>
+        var show = document.getElementById("show");
+        var $table, $tr, $td, $text;
+        var xhtp = new XMLHttpRequest();
+        
+        xhtp.onreadystatechange = function () {
+            if (xhtp.readyState == 4 && xhtp.status == 200) {
+                console.log(xhtp.responseText);
+                var datas = JSON.parse(xhtp.responseText);
+                $tbl = document.createElement("table");
+                $tbl.setAttribute("border", 1);
+
+                var titles = ["board_no", "content", "writer", "create_date"];
+
+                $tr = document.createElement("tr");
+                for (f in titles) {
+                    $th = document.createElement("th");
+                    $text = document.createTextNode(titles[f]);
+                    $th.appendChild($text);
+                    $tr.appendChild($th);
+                }
+                $tbl.appendChild($tr)
+                datas.forEach(function (o) {
+
+                    $tr = document.createElement("tr");
+                    for (field of titles) {
+                        $text = document.createTextNode(o[field]);
+                        $td = document.createElement("td");
+                        $td.appendChild($text);
+                        $tr.appendChild($td);
+                    }
+                    $tbl.appendChild($tr);
+                    document.body.appendChild($tbl);
+                });
+                show.appendChild($table);
+            }
+        }
+        xhtp.open("get", "../GetBoardListServlet", true);
+        xhtp.send();
+    </script>
+</body>
+
+</html>
