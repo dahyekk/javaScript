@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>insertEmp.html</title>
+</head>
+<body>
+    LastName:<input type="text" name="" id = "lastname"><br>
+    Email: <input type="text" id="email"><br>
+    Job: <input type="text" id="jobid"><br>
+    <button onclick="insertEmpFunc()"> Click </button>
+    <script>
+        function insertEmpFunc(){
+            var lName = document.getElementById('lastname').value;
+            var email = document.getElementById('email').value;
+            var jobid = document.getElementById('jobid').value;
+            var xhtp = new XMLHttpRequest();
+            xhtp.onreadystatechange = function(){
+                console.log(xhtp.responseText);
+            }
+            xhtp.open("post", "../InsertEmpServlet", true);    //true : 비동기, flase : 동기.
+            xhtp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhtp.send("lastname="+lName+"&email="+email+"&jobid="+jobid);
+            //field1 = value1 & field2 = value2 & field3 = value3
+        }
+    </script>
+</body>
+</html>
